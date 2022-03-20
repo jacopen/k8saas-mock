@@ -48,7 +48,7 @@ module "aks" {
   enable_http_application_routing  = true
   enable_azure_policy              = true
   enable_auto_scaling              = false
-  enable_host_encryption           = true
+  enable_host_encryption           = false
   agents_min_count                 = 1
   agents_max_count                 = 2
   agents_count                     = 1
