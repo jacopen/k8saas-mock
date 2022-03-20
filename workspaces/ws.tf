@@ -22,7 +22,7 @@ resource "tfe_run_trigger" "corp_a" {
 
 ## Setup secrets to workspace
 data "vault_generic_secret" "corp_a_secrets" {
-  path = "secret/k8saas/corp_a"
+  path = "kv/k8saas/corp_a"
 }
 resource "tfe_variable" "corp_a_subscription_id" {
   key          = "ARM_SUBSCRIPTION_ID"
