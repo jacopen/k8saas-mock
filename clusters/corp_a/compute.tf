@@ -37,7 +37,7 @@ module "aks" {
   orchestrator_version             = "1.23.3"
   prefix                           = "k8saas"
   cluster_name                     = "corp_a"
-  network_plugin                   = "azure"
+  network_plugin                   = "kubenet"
   vnet_subnet_id                   = data.terraform_remote_state.base.outputs.vnet_subnet_id
   os_disk_size_gb                  = 50
   sku_tier                         = "Free"
@@ -69,8 +69,9 @@ module "aks" {
   ingress_application_gateway_name = "aks-agw"
   ingress_application_gateway_subnet_cidr = "10.52.1.0/24"
 
-  network_policy                 = "azure"
-  net_profile_dns_service_ip     = "10.0.0.10"
-  net_profile_docker_bridge_cidr = "170.10.0.1/16"
-  net_profile_service_cidr       = "10.0.0.0/16"
+  network_policy                 = "calico"
+  pod_cidr = "10.0.250.0/24"
+  # net_profile_dns_service_ip     = "10.0.0.10"
+  # net_profile_docker_bridge_cidr = "170.10.0.1/16"
+  # net_profile_service_cidr       = "10.0.250.0/24"
 }
