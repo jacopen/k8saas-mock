@@ -24,6 +24,7 @@ provider "tfe" {
 
 provider "vault" {
   address = var.vault_address
+  namespace = "admin"
   auth_login {
     path = "auth/approle/login"
     namespace = "admin"
