@@ -14,12 +14,6 @@ resource "tfe_workspace" "corp_a" {
   terraform_version = "1.1.6"
 }
 
-## Workaround. Need to consider how to run first plan.
-resource "tfe_run_trigger" "corp_a" {
-  workspace_id  = tfe_workspace.corp_a.id
-  sourceable_id = data.tfe_workspace.k8saas_mock.id
-}
-
 ## Setup secrets to workspace
 data "vault_generic_secret" "corp_a_secrets" {
   path = "kv/k8saas/corp_a"
