@@ -27,10 +27,6 @@ data "azurerm_resource_group" "main" {
   name = data.terraform_remote_state.base.outputs.resource_group_name
 }
 
-data "azuread_group" "aks_cluster_admins" {
-  name = "AKS-cluster-admins"
-}
-
 module "aks" {
   source                           = "Azure/aks/azurerm"
   resource_group_name              = data.azurerm_resource_group.main
@@ -43,8 +39,7 @@ module "aks" {
   os_disk_size_gb                  = 50
   sku_tier                         = "Free"
   enable_role_based_access_control = true
-  rbac_aad_admin_group_object_ids  = [data.azuread_group.aks_cluster_admins.id]
-  rbac_aad_managed                 = true
+  rbac_aad_managed                 = false
   private_cluster_enabled          = true
   enable_http_application_routing  = true
   enable_azure_policy              = true
