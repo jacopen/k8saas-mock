@@ -4,7 +4,7 @@ resource "tfe_workspace" "corp_a" {
   auto_apply          = true
   queue_all_runs      = false
   speculative_enabled = false
-  working_directory   = "corp_a"
+  working_directory   = "clusters/corp_a"
   vcs_repo {
     identifier         = "jacopen/k8saas-mock"
     ingress_submodules = false
