@@ -4,12 +4,19 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "=2.97.0"
     }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "~> 2.15.0"
+    }
   }
 }
 
 provider "azurerm" {
   features {}
 }
+provider "azuread" {
+}
+
 
 data "terraform_remote_state" "base" {
   backend = "remote"
@@ -28,7 +35,7 @@ data "azurerm_resource_group" "main" {
 }
 
 data "azuread_group" "aks_cluster_admins" {
-  name = "Solution Engineers"
+  display_name = "Solution Engineers"
 }
 
 module "aks" {
