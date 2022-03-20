@@ -29,7 +29,7 @@ data "azurerm_resource_group" "main" {
 
 module "aks" {
   source                           = "Azure/aks/azurerm"
-  resource_group_name              = data.azurerm_resource_group.main
+  resource_group_name              = data.azurerm_resource_group.main.name
   kubernetes_version               = "1.19.3"
   orchestrator_version             = "1.19.3"
   prefix                           = "k8saas"
