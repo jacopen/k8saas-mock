@@ -4,10 +4,6 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "=2.97.0"
     }
-    azuread = {
-      source  = "hashicorp/azuread"
-      version = "~> 2.15.0"
-    }
   }
 }
 
@@ -34,10 +30,6 @@ data "azurerm_resource_group" "main" {
   name = data.terraform_remote_state.base.outputs.resource_group_name
 }
 
-data "azuread_group" "aks_cluster_admins" {
-  display_name = "Solution Engineers"
-}
-
 module "aks" {
   source                           = "Azure/aks/azurerm"
   resource_group_name              = data.azurerm_resource_group.main.name
@@ -51,7 +43,7 @@ module "aks" {
   sku_tier                         = "Free"
   enable_role_based_access_control = true
   rbac_aad_managed                 = true
-  rbac_aad_admin_group_object_ids  = [data.azuread_group.aks_cluster_admins.id]
+  rbac_aad_admin_group_object_ids  = ["7e471924-f039-45f7-bc94-70e9eadb0014"]
   private_cluster_enabled          = true
   enable_http_application_routing  = true
   enable_azure_policy              = true
