@@ -35,7 +35,7 @@ module "aks" {
   resource_group_name              = data.azurerm_resource_group.main.name
   kubernetes_version               = "1.23.3"
   orchestrator_version             = "1.23.3"
-  prefix                           = "k8saas"
+  prefix                           = "k8saas_CLUSTER_ID"
   cluster_name                     = "CLUSTER_ID"
   network_plugin                   = "kubenet"
   vnet_subnet_id                   = data.terraform_remote_state.base.outputs.vnet_subnet_id
