@@ -1,4 +1,12 @@
 terraform {
+  backend "remote" {
+    hostname     = "app.terraform.io"
+    organization = "kusama"
+
+    workspaces {
+      name = "corp_b"
+    }
+  }
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
