@@ -1,0 +1,16 @@
+{
+  "data": {
+    "attributes": {
+      "message": "Run from setup script"
+    },
+    "type":"runs",
+    "relationships": {
+      "workspace": {
+        "data": {
+          "type": "workspaces",
+          "id": "WS_ID"
+        }
+      }
+    }
+  }
+}

@@ -2,6 +2,7 @@
 
 CMDNAME=`basename $0`
 TEMPLATE_DIR=./templates
+BASE_DIR=$PWD
 
 _usage(){
     echo "Usage: $CMDNAME [-c CLUSTER_ID]" 1>&2
@@ -31,3 +32,20 @@ echo "Commit files to the repository"
 git add workspaces/$CLUSTER_ID.tf clusters/$CLUSTER_ID
 git commit -m "Add $CLUSTER_ID"
 git push origin main
+
+echo "Waiting 90sec"
+sleep 90
+
+echo "Waiting 90sec"
+WS_ID=`curl \
+  --header "Authorization: Bearer $TFE_TOKEN" \
+  --header "Content-Type: application/vnd.api+json" \
+  https://app.terraform.io/api/v2/organizations/kusama/workspaces \
+  | jq ".data[] | select (.attributes.name==\"$CLUSTER_ID\")" | jq -r .id`
+
+cat request.json | sed "s/WS_ID/$WS_ID/" | curl \
+  --header "Authorization: Bearer $TFE_TOKEN" \
+  --header "Content-Type: application/vnd.api+json" \
+  --request POST \
+  --data @- \
+  https://app.terraform.io/api/v2/runs

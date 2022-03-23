@@ -10,7 +10,7 @@ resource "tfe_workspace" "CLUSTER_ID" {
     ingress_submodules = false
     oauth_token_id     = var.oauth_token_id
   }
-  execution_mode = "remote"
+  execution_mode    = "remote"
   terraform_version = "1.1.6"
 }
 

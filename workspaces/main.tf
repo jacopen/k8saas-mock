@@ -4,13 +4,13 @@ terraform {
     organization = "kusama"
 
     workspaces {
-      name = "azure-workloads"
+      name = "k8saas-mock"
     }
   }
   required_providers {
     vault = {
       source  = "hashicorp/vault"
-      version = "=3.3.1"
+      version = "~> 3.3.1"
     }
     tfe = {
       version = "~> 0.27.0"
@@ -19,14 +19,13 @@ terraform {
 }
 
 provider "tfe" {
-  version = "~> 0.27.0"
 }
 
 provider "vault" {
-  address = var.vault_address
+  address   = var.vault_address
   namespace = "admin"
   auth_login {
-    path = "auth/approle/login"
+    path      = "auth/approle/login"
     namespace = "admin"
 
     parameters = {
